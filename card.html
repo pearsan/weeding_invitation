@@ -3,52 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personalized Card</title>
+    <title>Wedding Invitation</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
     <style>
-        body { margin: 0; padding: 0; background: #1a1a1a; display: flex; justify-content: center; align-items: flex-start; }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #fdfdfd; /* Light background to make the card stand out */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
         .card-container {
             position: relative;
             width: 100%;
-            max-width: 800px; /* Adjust to match your image width if needed */
+            max-width: 800px;
             line-height: 0;
+            /* Keeps the card slightly away from edges on mobile */
+            box-sizing: border-box;
+            padding: 10px; 
         }
 
         .card-bg {
             width: 100%;
             height: auto;
             display: block;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
         #display-name {
             position: absolute;
             
-            /* Your updated coordinates */
-            top: 31%; 
+            /* Your precise coordinates */
+            top: 30%; 
             left: 66%;
-            
             transform: translate(-50%, -50%);
             
-            /* Text Styling */
+            /* Font Settings */
             font-family: 'Great Vibes', cursive;
-            font-size: 4vw; /* Scales with screen size */
-            color: #a87d32; /* Change this to match your Canva design color */
-            text-align: center;
-            white-space: nowrap; /* Prevents the name from wrapping to a second line */
+            font-size: 4vw; /* Mobile size */
+            color: #a87d32; /* Pure Black */
             
-            /* Subtle shadow to make calligraphy readable */
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            text-align: center;
+            white-space: nowrap;
             pointer-events: none;
         }
 
-        /* Stop the font from getting too big on desktop screens */
+        /* Desktop override */
         @media (min-width: 800px) {
-            #display-name { font-size: 32px; }
+            #display-name { 
+                font-size: 32px; /* Fixed Desktop size */
+            }
         }
     </style>
 </head>
@@ -60,11 +74,9 @@
     </div>
 
     <script>
-        // Logic to grab the name from the URL
         const params = new URLSearchParams(window.location.search);
         const name = params.get('name');
         if (name) {
-            // Decodes the URL name (e.g., Alex%20Smith becomes Alex Smith)
             document.getElementById('display-name').innerText = decodeURIComponent(name);
         }
     </script>
