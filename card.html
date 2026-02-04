@@ -3,51 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Personalized Card</title>
-    <style>
-        body { margin: 0; padding: 0; background: #1a1a1a; display: flex; justify-content: center; }
+    <title>Personalized Card</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
-        /* 1. The Container defines the maximum width of your card */
+    <style>
+        body { margin: 0; padding: 0; background: #1a1a1a; display: flex; justify-content: center; align-items: flex-start; }
+
         .card-container {
             position: relative;
             width: 100%;
-            max-width: 800px; /* Adjust this to your design's actual width */
-            line-height: 0;   /* Removes tiny gap under the image */
+            max-width: 800px; /* Adjust to match your image width if needed */
+            line-height: 0;
         }
 
-        /* 2. The Background Image */
         .card-bg {
             width: 100%;
             height: auto;
             display: block;
         }
 
-        /* 3. The Dynamic Text Layer */
         #display-name {
             position: absolute;
             
-            /* --- ADJUST THESE PERCENTAGES --- */
-            top: 30%;  /* Distance from top (0% to 100%) */
-            left: 66%;   /* Distance from left (0% to 100%) */
-            /* -------------------------------- */
-
-            transform: translate(-50%, -50%); /* Keeps text centered on its coordinates */
+            /* Your updated coordinates */
+            top: 30%; 
+            left: 66%;
             
-            width: 80%;       /* Prevents long names from breaking the layout */
+            transform: translate(-50%, -50%);
+            
+            /* Text Styling */
+            font-family: 'Great Vibes', cursive;
+            font-size: 7vw; /* Scales with screen size */
+            color: #000000; /* Change this to match your Canva design color */
             text-align: center;
-            line-height: 1.2;
+            white-space: nowrap; /* Prevents the name from wrapping to a second line */
             
-            /* Typography - Match your Canva font style */
-            font-family: 'Arial', sans-serif; 
-            font-size: 5vw;   /* 'vw' makes the font scale with the screen width */
-            color: #000000;
-            font-weight: bold;
-            pointer-events: none; /* Allows clicks to pass through to the image */
+            /* Subtle shadow to make calligraphy readable */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            pointer-events: none;
         }
 
-        /* Desktop specific: Stop font from getting too huge on big screens */
+        /* Stop the font from getting too big on desktop screens */
         @media (min-width: 800px) {
-            #display-name { font-size: 28px; }
+            #display-name { font-size: 56px; }
         }
     </style>
 </head>
@@ -59,10 +60,12 @@
     </div>
 
     <script>
+        // Logic to grab the name from the URL
         const params = new URLSearchParams(window.location.search);
         const name = params.get('name');
         if (name) {
-            document.getElementById('display-name').innerText = name;
+            // Decodes the URL name (e.g., Alex%20Smith becomes Alex Smith)
+            document.getElementById('display-name').innerText = decodeURIComponent(name);
         }
     </script>
 </body>
