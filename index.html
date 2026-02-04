@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Generator</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f2f5; }
+        .card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 350px; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background-color: #7d2ae8; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        #result { margin-top: 20px; display: none; word-break: break-all; padding: 10px; background: #eef; border-radius: 4px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Card Generator</h2>
+        <p>Enter a name to create a personalized link:</p>
+        <input type="text" id="nameInput" placeholder="e.g. Alex">
+        <button onclick="generateLink()">Generate Link</button>
+        
+        <div id="result">
+            <strong>Your Link:</strong><br>
+            <a id="generatedLink" href="#" target="_blank"></a>
+        </div>
+    </div>
+
+    <script>
+        function generateLink() {
+            const name = document.getElementById('nameInput').value;
+            if (!name) return alert("Please enter a name");
+            
+            // Get the current URL path to build the link dynamically
+            const baseUrl = window.location.href.replace('index.html', '');
+            const finalUrl = baseUrl + "card.html?name=" + encodeURIComponent(name);
+            
+            const resultDiv = document.getElementById('result');
+            const linkTag = document.getElementById('generatedLink');
+            
+            linkTag.href = finalUrl;
+            linkTag.innerText = finalUrl;
+            resultDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
