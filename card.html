@@ -3,28 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Card</title>
+    <title>Your Personalized Card</title>
     <style>
-        body { margin: 0; display: flex; justify-content: center; background: #222; }
-        .container { position: relative; width: 100%; max-width: 600px; }
-        img { width: 100%; display: block; }
+        body { margin: 0; padding: 0; background: #1a1a1a; display: flex; justify-content: center; }
 
-        /* Positioning the name over the Canva image */
+        /* 1. The Container defines the maximum width of your card */
+        .card-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px; /* Adjust this to your design's actual width */
+            line-height: 0;   /* Removes tiny gap under the image */
+        }
+
+        /* 2. The Background Image */
+        .card-bg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 3. The Dynamic Text Layer */
         #display-name {
             position: absolute;
-            top: 40%; /* Adjust this to move name up/down */
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2.5rem;
-            color: #ffffff; /* Match your Canva text color */
-            font-family: 'Arial', sans-serif;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            
+            /* --- ADJUST THESE PERCENTAGES --- */
+            top: 45.5%;  /* Distance from top (0% to 100%) */
+            left: 50%;   /* Distance from left (0% to 100%) */
+            /* -------------------------------- */
+
+            transform: translate(-50%, -50%); /* Keeps text centered on its coordinates */
+            
+            width: 80%;       /* Prevents long names from breaking the layout */
+            text-align: center;
+            line-height: 1.2;
+            
+            /* Typography - Match your Canva font style */
+            font-family: 'Arial', sans-serif; 
+            font-size: 5vw;   /* 'vw' makes the font scale with the screen width */
+            color: #ffffff;
+            font-weight: bold;
+            pointer-events: none; /* Allows clicks to pass through to the image */
+        }
+
+        /* Desktop specific: Stop font from getting too huge on big screens */
+        @media (min-width: 800px) {
+            #display-name { font-size: 40px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="background.jpg" alt="Card Background">
+
+    <div class="card-container">
+        <img src="background.jpg" alt="Background" class="card-bg">
         <div id="display-name">Guest</div>
     </div>
 
